@@ -1,0 +1,40 @@
+{% extends "tracker/base.html" %}
+
+{% block title %}Suggest Exercise | FitFriends{% endblock %}
+
+{% block content %}
+<h1>Suggest a New Exercise</h1>
+<p>Use this form to suggest a new bodyweight or gym exercise. It will only appear after an admin approves it.</p>
+
+<form method="post" class="card card-body" style="max-width: 600px;">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    {{ form.name }}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Muscle group</label>
+    {{ form.muscle_group }}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Equipment</label>
+    {{ form.equipment }}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    {{ form.description }}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Video URL (optional)</label>
+    {{ form.video_url }}
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit for approval</button>
+</form>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends "tracker/base.html" %}
+
+{% block title %}Dashboard | FitFriends{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Hi {{ request.user.username }}, how was your day?</h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>Today – {{ today }}</h3>
+    <form method="post" class="card card-body mb-3">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="mb-2">
+        <label class="form-label">Date</label>
+        {{ form.date }}
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Sleep hours</label>
+        {{ form.sleep_hours }}
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Fasting hours</label>
+        {{ form.fasting_hours }}
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Calories</label>
+        {{ form.calories }}
+      </div>
+
+      <div class="mb-2">
+         <label class="form-label">Workouts</label>
+        {{ form.workouts }}
+        <small class="text-muted d-block mt-1">
+            Hold Cmd (Mac) or Ctrl (Windows) to select more than one.
+        </small>
+      </div>
+
+
+      <div class="form-check mb-2">
+        {{ form.workout_completed }}
+        <label class="form-check-label">Workout completed</label>
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Notes</label>
+        {{ form.notes }}
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-2">Save today</button>
+    </form>
+  </div>
+
+  <div class="col-md-6">
+    <h3>Last 7 days</h3>
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Sleep</th>
+          <th>Fast</th>
+          <th>Cal</th>
+          <th>Workouts</th>
+          <th>Done</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for log in recent_logs %}
+          <tr>
+            <td>{{ log.date }}</td>
+            <td>{{ log.sleep_hours|default:"-" }}</td>
+            <td>{{ log.fasting_hours|default:"-" }}</td>
+            <td>{{ log.calories|default:"-" }}</td>
+
+            <td class="ff-log-workout">
+              {# Prefer the new ManyToMany workouts #}
+              {% if log.workouts.count %}
+                {% for w in log.workouts.all %}
+                  <a href="{% url 'workout_detail' w.pk %}" class="exercise-link">
+                    {{ w.name }}
+                  </a>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+              {% elif log.workout %}
+                {# Fallback for older logs that only used the single workout field #}
+                <a href="{% url 'workout_detail' log.workout.pk %}" class="exercise-link">
+                  {{ log.workout.name }}
+                </a>
+              {% else %}
+                -
+              {% endif %}
+            </td>
+
+            <td>
+              {% if log.workout_completed %}
+                ✅
+              {% else %}
+                ❌
+              {% endif %}
+            </td>
+          </tr>
+        {% empty %}
+          <tr><td colspan="6">No logs yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

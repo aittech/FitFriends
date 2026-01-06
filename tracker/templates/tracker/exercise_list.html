@@ -1,0 +1,31 @@
+{% extends "tracker/base.html" %}
+
+{% block title %}Exercises | FitFriends{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Exercises</h1>
+
+<form class="row mb-3" action="{% url 'exercise_search' %}" method="get">
+  <div class="col-auto">
+    <input type="text" name="q" class="form-control" placeholder="Search exercises...">
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary">Search</button>
+  </div>
+</form>
+
+<ul class="list-group">
+  {% for exercise in exercises %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <a href="{% url 'exercise_detail' exercise.pk %}" class="exercise-link">
+        {{ exercise.name }}
+      </a>
+      <span class="text-muted">
+        {{ exercise.muscle_group }}
+      </span>
+    </li>
+  {% empty %}
+    <li class="list-group-item">No exercises yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

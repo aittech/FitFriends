@@ -1,0 +1,48 @@
+{% extends "tracker/base.html" %}
+
+{% block title %}Suggest Workout | FitFriends{% endblock %}
+
+{% block content %}
+<h1>Suggest a New Workout</h1>
+<p>Design a workout for the FitFriends community. 
+  Include the exercises, sets and reps in the description, for example:
+  “3 rounds of: 10 squats, 10 push-ups, 30s plank, 1 min rest”. 
+  An admin will review it and turn it into a structured workout.</p>
+
+<form method="post" class="card card-body" style="max-width: 700px;">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    {{ form.name }}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    {{ form.description }}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Approx total time (minutes)</label>
+    {{ form.total_time_minutes }}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Difficulty</label>
+    {{ form.difficulty }}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Category</label>
+    {{ form.category }}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Workout video URL (optional)</label>
+    {{ form.video_url }}
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit for approval</button>
+</form>
+{% endblock %}

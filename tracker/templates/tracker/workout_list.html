@@ -1,0 +1,42 @@
+{% extends "tracker/base.html" %}
+
+{% block title %}Workouts | FitFriends{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Workouts</h1>
+
+<ul class="list-group">
+  {% for workout in workouts %}
+    <li class="list-group-item">
+      <h5 class="mb-1">
+        <a href="{% url 'workout_detail' workout.pk %}" class="exercise-link">
+          {{ workout.name }}
+        </a>
+      </h5>
+
+      <p class="mb-1">
+        {% if workout.category %}
+          <span class="badge bg-secondary">
+            {{ workout.get_category_display }}
+          </span>
+        {% endif %}
+        {% if workout.total_time_minutes %}
+          &nbsp; ~{{ workout.total_time_minutes }} min
+        {% endif %}
+      </p>
+
+      <p class="text-muted small mb-1">
+        by {{ workout.author_name }}
+      </p>
+
+      {% if workout.description %}
+        <p class="text-muted mb-0">
+          {{ workout.description|truncatechars:120 }}
+        </p>
+      {% endif %}
+    </li>
+  {% empty %}
+    <li class="list-group-item">No workouts yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

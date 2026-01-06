@@ -1,0 +1,312 @@
+/* ===== Global layout ===== */
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, #e0f2fe 0, #f5f7fb 35%, #f8fafc 100%);
+  color: #0f172a;
+  min-height: 100vh;
+  border: 4px solid #22c55e;  
+  background: #e0f2fe !important;
+
+}
+
+.ff-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.ff-main {
+  flex: 1;
+}
+
+/* ===== FitFriends logo ===== */
+
+.ff-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.ff-logo:hover {
+  text-decoration: none;
+}
+
+.ff-logo-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 2px solid #22c55e;              /* FitFriends green */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: #22c55e;                          /* check colour */
+  background: rgba(15, 23, 42, 0.95);      /* dark navy to match navbar */
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.5);
+}
+
+.ff-logo-text {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.ff-logo-fit {
+  color: #e5e7eb;                          /* light “Fit” for dark navbar */
+}
+
+.ff-logo-friends {
+  color: #22c55e;                          /* green “Friends” */
+  margin-left: 0.2rem;
+}
+
+/* Larger hero logo for landing page */
+.ff-logo-large {
+  font-size: 2.1rem;
+}
+
+.ff-logo-large .ff-logo-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem;
+  border-width: 2.5px;
+}
+
+
+
+/* ===== Navbar ===== */
+
+.navbar {
+  background: linear-gradient(90deg, #0f172a, #020617);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.navbar .nav-link {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.navbar .nav-link:hover,
+.navbar .btn:hover {
+  opacity: 1;
+}
+
+/* ===== Cards, panels ===== */
+
+.card {
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  box-shadow: 0 18px 35px rgba(15, 23, 42, 0.08);
+}
+
+.card-header {
+  border-bottom: none;
+  background: transparent;
+  font-weight: 600;
+}
+
+/* ===== Buttons ===== */
+
+.btn-primary {
+  background: linear-gradient(135deg, #22c55e, #14b8a6);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #16a34a, #0d9488);
+}
+
+.btn-outline-light {
+  border-radius: 999px;
+}
+
+/* ===== Forms – modern inputs ===== */
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="url"],
+input[type="file"],
+select,
+textarea {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #cbd5f5;
+  background: rgba(255, 255, 255, 0.96);
+  padding: 0.55rem 0.9rem;
+  font-size: 0.95rem;
+  color: #0f172a;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease,
+    transform 0.08s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+input[type="url"]:focus,
+input[type="file"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 0.12rem rgba(34, 197, 94, 0.25);
+  background: #ffffff;
+  transform: translateY(-1px);
+}
+
+select {
+  cursor: pointer;
+}
+
+textarea {
+  border-radius: 18px;
+  min-height: 90px;
+  resize: vertical;
+}
+
+
+/* ===== Tables ===== */
+
+.table {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.table thead {
+  background: #e2e8f0;
+}
+
+.table th {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #475569;
+}
+
+/* ===== Page-specific helpers ===== */
+
+.ff-page-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.ff-subtitle {
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  font-weight: 600;  /* 700 for extra bold */
+}
+
+.form-check-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* Links inside tables (exercise list, workout list, etc.) */
+.table a {
+  font-size: 0.95rem;
+  font-weight: 600;              /* similar weight to your form labels */
+  letter-spacing: 0.03em;        /* subtle label-like spacing */
+  color: #0f172a;                /* dark navy instead of bright blue */
+  text-decoration: none;
+}
+
+.table a:hover {
+  color: #22c55e;                /* your FitFriends green on hover */
+  text-decoration: underline;
+}
+
+/* Exercise name links in the list */
+.exercise-link {
+  font-size: 0.95rem;
+  font-weight: 600;          /* similar weight to your form labels */
+  letter-spacing: 0.03em;
+  color: #64748b;             
+  text-decoration: none;
+}
+
+.exercise-link:hover {
+  color: #22c55e;            /* FitFriends green on hover */
+  text-decoration: underline;
+}
+
+/* ===== Landing page ===== */
+
+.ff-landing {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.ff-landing-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.ff-landing-subtitle {
+  font-size: 1rem;
+  color: #4b5563;
+  max-width: 34rem;
+}
+
+.ff-landing-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.ff-landing-list li {
+  margin-bottom: 0.35rem;
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+
+/* Hero preview card */
+.ff-landing-preview {
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+/* Make logo colours work on the light landing background */
+.ff-landing .ff-logo-fit {
+  color: #0f172a;      /* dark navy */
+}
+
+.ff-landing .ff-logo-friends {
+  color: #22c55e;      /* keep the green */
+}
+
+/* Last 7 days table: workouts column */
+.ff-log-workouts {
+  max-width: 220px;
+  white-space: normal;
+  word-break: break-word;
+}

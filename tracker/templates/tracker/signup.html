@@ -1,0 +1,82 @@
+{% extends "tracker/base.html" %}
+
+{% block title %}Sign up | FitFriends{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-7 col-lg-6">
+    <h1 class="mb-2 ff-page-title">Join FitFriends</h1>
+    <p class="ff-subtitle">
+      Create an account so you can track your sleep, fasting, workouts and calories with friends.
+    </p>
+
+    <form method="post" enctype="multipart/form-data" class="card card-body mt-3">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        {{ form.email }}
+        {{ form.email.errors }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        {{ form.password1 }}
+        {{ form.password1.errors }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Confirm password</label>
+        {{ form.password2 }}
+        {{ form.password2.errors }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Display name</label>
+        {{ form.display_name }}
+        {{ form.display_name.errors }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Date of birth</label>
+        {{ form.date_of_birth }}
+        {{ form.date_of_birth.errors }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Gender</label>
+        {{ form.gender }}
+        {{ form.gender.errors }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Country</label>
+        {{ form.country }}
+        {{ form.country.errors }}
+      </div>
+
+      <div class="form-check mb-3">
+        {{ form.is_public }}
+        <label class="form-check-label" for="{{ form.is_public.id_for_label }}">
+          {{ form.is_public.label }}
+        </label>
+        {% if form.is_public.help_text %}
+          <div class="form-text">
+            {{ form.is_public.help_text }}
+          </div>
+        {% endif %}
+        {{ form.is_public.errors }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="{{ form.profile_photo.id_for_label }}">Profile photo</label>
+        {{ form.profile_photo }}
+        {{ form.profile_photo.errors }}
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-2">Create account</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

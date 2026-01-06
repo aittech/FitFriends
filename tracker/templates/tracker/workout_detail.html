@@ -1,0 +1,66 @@
+{% extends "tracker/base.html" %}
+
+{% block title %}{{ workout.name }} | FitFriends{% endblock %}
+
+{% block content %}
+<h1 class="mb-1">{{ workout.name }}</h1>
+
+<p class="text-muted mb-2 small">
+  by {{ workout.author_name }}
+</p>
+
+<p class="mb-2">
+  {% if workout.category %}
+    <span class="badge bg-secondary">
+      {{ workout.get_category_display }}
+    </span>
+  {% endif %}
+  {% if workout.total_time_minutes %}
+    <span class="ms-2 text-muted">
+      Approx. {{ workout.total_time_minutes }} minutes
+    </span>
+  {% endif %}
+</p>
+
+{% if workout.description %}
+  <p class="mb-3">{{ workout.description }}</p>
+{% endif %}
+
+{% if workout.video_url %}
+  <h3 class="mt-4">Workout video</h3>
+  <p>
+    <a href="{{ workout.video_url }}" target="_blank" class="btn btn-outline-primary">
+      Watch how to do this workout
+    </a>
+  </p>
+{% endif %}
+
+<h3 class="mt-4">Exercises</h3>
+<ol class="list-group list-group-numbered">
+  {% for we in workout_exercises %}
+    <li class="list-group-item">
+      <strong>{{ we.exercise.name }}</strong>
+      {% if we.sets or we.reps %}
+        – {{ we.sets|default:"" }}{% if we.sets %} ×{% endif %} {{ we.reps|default:"" }} reps
+      {% endif %}
+      {% if we.duration_seconds %}
+        – {{ we.duration_seconds }} sec
+      {% endif %}
+      {% if we.notes %}
+        <div class="text-muted">{{ we.notes }}</div>
+      {% endif %}
+      <div class="mt-1">
+        <a href="{% url 'exercise_detail' we.exercise.pk %}" class="exercise-link">
+          View exercise details
+        </a>
+      </div>
+    </li>
+  {% empty %}
+    <li class="list-group-item">No exercises added yet.</li>
+  {% endfor %}
+</ol>
+
+<p class="mt-3">
+  <a href="{% url 'workout_list' %}" class="btn btn-link">Back to workouts</a>
+</p>
+{% endblock %}

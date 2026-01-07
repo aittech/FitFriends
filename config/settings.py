@@ -1,3 +1,9 @@
+
+
+import os
+
+
+
 """
 Django settings for config project.
 
@@ -12,6 +18,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +32,11 @@ SECRET_KEY = 'django-insecure--mp4b(#m_h@w^*k8doy9@mt=9^c#xt&jlo@7rxc+$v*7q$=$)@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
+DEFAULT_FROM_EMAIL = "no-reply@fitfriends.local"
 
 
 # Application definition
@@ -39,6 +50,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_countries',
     'tracker',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'tracker.auth_backends.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +147,5 @@ LOGOUT_REDIRECT_URL = 'login'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+C_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

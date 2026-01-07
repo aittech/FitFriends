@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
-
+from tracker.forms import EmailAuthenticationForm
 urlpatterns = [
     
     path('', views.landing, name='home'), # make landing the home
@@ -25,7 +25,8 @@ urlpatterns = [
     
     # auth
     path('login/', auth_views.LoginView.as_view(
-        template_name='tracker/login.html'
+    	template_name='tracker/login.html',
+    	authentication_form=EmailAuthenticationForm
     ), name='login'),
     path('logout/', auth_views.LogoutView.as_view(
         next_page='login'

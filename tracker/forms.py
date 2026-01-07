@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from django_countries.widgets import CountrySelectWidget
 from django_countries import countries
 from .models import DailyLog, Workout, Exercise, Profile
-
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 
 class WorkoutMultipleChoiceField(forms.ModelMultipleChoiceField):
     """
@@ -161,3 +162,20 @@ class SignUpForm(forms.ModelForm):
                 profile_photo=self.cleaned_data.get('profile_photo'),
             )
         return user
+
+class EmailAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(
+        label="Email",
+        widget=forms.TextInput(attrs={"placeholder": "Enter your email address"})
+    )
+class BootstrapPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["email"].widget.attrs.update({"class": "form-control"})
+
+
+class BootstrapSetPasswordForm(SetPasswordForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["new_password1"].widget.attrs.update({"class": "form-control"})
+        self.fields["new_password2"].widget.attrs.update({"class": "form-control"})

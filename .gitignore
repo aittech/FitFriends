@@ -10,6 +10,7 @@ __pycache__/
 db.sqlite3
 staticfiles/
 media/
+sent_emails/
 
 # OS files
 .DS_Store

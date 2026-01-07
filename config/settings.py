@@ -147,8 +147,7 @@ LOGOUT_REDIRECT_URL = 'login'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-C_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-SITE_URL = "http://127.0.0.1:8000"
+SITE_URL = "https://alwin.pythonanywhere.com"
 

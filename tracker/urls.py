@@ -31,4 +31,6 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(
         next_page='login'
     ), name='logout'),
+    
+    path("verify-email/<uidb64>/<token>/", views.verify_email, name="verify_email"),
 ]

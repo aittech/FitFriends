@@ -149,3 +149,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 C_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+SITE_URL = "http://127.0.0.1:8000"
+
